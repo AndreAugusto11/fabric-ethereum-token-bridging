@@ -15,6 +15,7 @@
     - [Scalability](#scalability)
     - [Applicability](#applicability)
   - [Main functionalities offered by bridges](#main-functionalities-offered-by-bridges)
+  - [Hyperledger Fabric - Ethereum bridge using IBC (from Datachain)](#hyperledger-fabric---ethereum-bridge-using-ibc-from-datachain)
   - [References](#references)
 <br></br>
 
@@ -155,6 +156,51 @@ We summarize the main functionalities/services offered by bridges as:
 - Specific business logic operations
 - Exchange rate oracles (or asset transformation schemes)
 <br></br>
+
+## Hyperledger Fabric - Ethereum bridge using IBC (from Datachain)
+There is currently a solution between Hyperledger Fabric and Ethereum that leverages IBC.
+As aforementioned IBC stands for Inter-Blockchain Communication and is a protocol that can be used for the communication between any chain that implements the protocol.
+There is almost no information about the details of this solution but we intend to summarize our findings through the information present in Medium articles and GitHub repositories documentation.
+
+<ol>
+  <li>
+  Motivation:
+  Due to service requirements and regulation issues, there will be two separate blockchains, one managing assets (securities, real estate, etc.) and the other managing payment tokens. In such a case, it is necessary to realize a DvP settlement between the two blockchains, the asset blockchain and the payment blockchain.
+  Specifically, if the ownership of the asset token managed by the asset blockchain is transferred from Alice to Bob, and the payment token managed by the payment blockchain is transferred from Bob to Alice, the balance updates in the asset blockchain and the payment blockchain need to be performed atomically.
+  </li>
+  <br>
+  <li>
+  To develop a bridge between Hyperledger Fabric and Ethereum it is required that both these systems implement IBC. The authors built extensions of the networks to support the protocol. Here are the GitHub repositories:
+
+  - https://github.com/hyperledger-labs/yui-fabric-ibc
+  - https://github.com/hyperledger-labs/yui-ibc-solidity
+
+  Both of these systems can communicate with any other chain that supports IBC.
+  </li>
+  <br>
+  <li>
+  This is done through an entity which is the relayer. It is an off-chain process defined by IBC that has the ability to read the state of transactions on a blockchain and relay them as Packets between blockchains. This relayer opens <a href="https://github.com/datachainlab/public-docs/blob/master/fabric-ibc/en/06_appendix.md">some issues</a> related to Fabric private environment.
+  
+  - https://github.com/hyperledger-labs/yui-relayer
+  </li>
+  <br>
+  <li>
+  Atomicity: 
+  They use the Cross Framework that enables distributed transactions over multiple blockchains. It enables the execution of a smart contract from one blockchain on the other:
+  
+  - https://github.com/datachainlab/cross
+  - https://medium.com/@datachain/cross-framework-introduction-f25d7bbfcd9a
+  </li>
+</ol>
+
+The restriction that arises from this approach is that it is required an extension of blockchains to support IBC.
+Additionally, given the private nature of Fabric there can arise some problems as mentioned in:
+- https://github.com/datachainlab/public-docs/blob/master/fabric-ibc/en/06_appendix.md#regarding-the-privacy-of-relayer
+
+**Other Useful Links**
+
+- https://medium.com/@datachain/datachain-and-ntt-data-successfully-verified-a-bridge-between-ethereum-and-hyperledger-fabric-using-56a96480e8a4
+- https://johnniecosmos.medium.com/inter-blockchain-communication-protocol-ibc-the-tcp-ip-protocol-of-blockchains-bridges-trends-b38ed700c681
 
 ---
 ## References
