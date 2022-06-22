@@ -10,6 +10,7 @@
     - [Trustless, privacy-preserving blockchain bridges](#trustless-privacy-preserving-blockchain-bridges)
     - [The Flexible Interledger Bridge Design](#the-flexible-interledger-bridge-design)
     - [Research on Cross-chain Technology of Blockchain: Challenges and Prospects](#research-on-cross-chain-technology-of-blockchain-challenges-and-prospects)
+    - [Hermes: Fault-tolerant middleware for blockchain interoperability](#hermes-fault-tolerant-middleware-for-blockchain-interoperability)
   - [Papers: Consortium - EVM (or similar) bridges](#papers-consortium---evm-or-similar-bridges)
     - [Niji: Autonomous Payment Bridge between Bitcoin and Consortium Blockchain](#niji-autonomous-payment-bridge-between-bitcoin-and-consortium-blockchain)
     - [Comparison of Hyperledger Fabric and Ethereum Blockchain](#comparison-of-hyperledger-fabric-and-ethereum-blockchain)
@@ -46,6 +47,10 @@ The overall protocol is completely agnostic to the underlying technologies and b
 
 ### Research on Cross-chain Technology of Blockchain: Challenges and Prospects
 This paper does not bring anything new to the table. It is focused on an analysis of the current solutions to achieve interoperability, but they were already mentioned before.
+
+
+### Hermes: Fault-tolerant middleware for blockchain interoperability
+Presents Hermes, an interoperability solution based on gateways and on the Open Digital Asset Protocol (ODAP). Hermes can be used in any blockchain that supports scripting capabilities (in order to lock and unlock assets through smart contract calls). This paper presents a novel approach to the problem by using gateways as relays between blockchain systems. Additionally, the protocol is suitable for both public and private environments.
 
 ## Papers: Consortium - EVM (or similar) bridges
 
