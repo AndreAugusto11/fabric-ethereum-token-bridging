@@ -10,10 +10,11 @@
     - [Blockchain of Blockchains](#blockchain-of-blockchains)
     - [Trusted Relays](#trusted-relays)
   - [Main differences between bridge solutions](#main-differences-between-bridge-solutions)
-    - [Centralization](#centralization)
-    - [Privacy](#privacy)
-    - [Scalability](#scalability)
-    - [Applicability](#applicability)
+    - [**Centralization**](#centralization)
+    - [**Security**](#security)
+    - [**Privacy**](#privacy)
+    - [**Scalability**](#scalability)
+    - [**Applicability**](#applicability)
   - [Main functionalities offered by bridges](#main-functionalities-offered-by-bridges)
   - [Hyperledger Fabric - Ethereum bridge using IBC (from Datachain)](#hyperledger-fabric---ethereum-bridge-using-ibc-from-datachain)
   - [References](#references)
@@ -115,20 +116,31 @@ Examples of deployed protocols: Interledger [6] and ODAP [7].
 ## Main differences between bridge solutions
 From our research, we can classify the different bridging solutions regarding different categories: centralization, privacy, scalability, and applicability.
 
-### Centralization
+### **Centralization**
 The first concern when designing a bridging solution is whether the bridge is centralized or decentralized. Naturally, this concept is tightly coupled with privacy and trust levels as explained in the next section. One can design a centralized solution like a traditional single entity notary scheme which is responsible for the interoperable solution. Unfortunately, this suffers from single point failures and eventual DoS attacks. Therefore, solutions that have this scheme are susceptible to 
 
-### Privacy
-With regards to the assets being exchanged or transferred we need to evaluate the risk of losses. Either the assets are escrowed by a third party (normally in mediated designs) or by automated smart contracts. In the first one, there is the risk of having the assets stolen from this third party entity, whereas in the latter, the risk is focused on the one-shot implementation of a smart contract (e.g., a bug in the code could cause the loss of assets). Additionally, in common centralized exchanges, like Binance, users need to disclose private information such as name, age, address, etc. In a smart contract environment, one would only disclose a digital address, which would be liked to a certain transaction or smart contract call (pseudonymization). Some solutions also leverage zk-SNARKs based on zero-knowledge proofs to overcome privacy issues.
+### **Security**
+With regards to the assets being exchanged or transferred we need to evaluate the risk of losses. Either the assets are escrowed by a third party (normally in mediated designs) or by automated smart contracts. In the first one, there is the risk of having the assets stolen from this third party entity, whereas in the latter, the risk is focused on the one-shot implementation of a smart contract (e.g., a bug in the code could cause the loss of assets).
 
-### Scalability
+### **Privacy**
+When talking about any kind of system, and specially one with interaction with users, it is important to mention privacy. We firstly define privacy in the context of blockchain bridging. The notion of privacy is tightly coupled with the disclosure of private information of the parties involved in a cross-chain transfer. We can divide the requirements as:
+- No information related to the involved entities should be disclosed, such as personal/sensitive information.
+- It should not be possible to link transactions in different blockchains concerning the same cross-chain transfer. This property is called *Fungibility* by [8].
+
+Additionally there are issues related to the privacy of the users. In common centralized exchanges, such as Binance, users need to disclose private information such as name, age, address, etc, to this third party entity.
+
+In a smart contract environment, one would only disclose a digital address, which would be liked to a certain transaction or smart contract call. It is possible to develop protocols that capture the transactions made involving some address and link it to the actual person/entity behind it. This introduces the concept of pseudonymization, where the true data is hidden from the world, but it is reversible because the original data can be obtained.
+
+Some solutions also leverage zk-SNARKs based on zero-knowledge proofs to overcome privacy issues.
+
+### **Scalability**
 When talking about scalability of networks (or extensibility of the protocols to other entities).
 
 When designing an interoperability solution, it is of major importance to think about scalability or extensibility of the protocols. Firstly, we can consider scalability as a means to perform transfers of assets between the highest number of blockchains as possible. And lastly, it is possible to think about atomic multi-party transfers (e.g., 1-N transfers between N entities).
 
 As a means of comparison we can think about blockchains of blockchains as networks that are scalable until a certain point due to the limited number of slots for chains (Polkadot has only 100 slots for parachains). On the other hand, trusted relays act as systems that are easily scalable and extendible to other, at the distance of developing one blockchain adapter/connector.
 
-### Applicability
+### **Applicability**
 It is also important to understand what are the protocols' use-cases: transfer of assets, tokens, or general data. The first efforts done towards blockchain interoperability were focused on the exchange of tokens. Through the time the focus has been changing to other types of assets (e.g., NFTs), and general data.
 <br></br>
 
@@ -220,3 +232,5 @@ Additionally, given the private nature of Fabric there can arise some problems a
 7. M. Hargreaves, T. Hardjono, R. Belchior, Open digital asset protocol draft
 02, draft-hargreaves-odap-03, 2021, Internet Engineering Task Force, URL
 https://datatracker.ietf.org/doc/html/draft-hargreaves-odap-03.
+
+8. Thyagarajan, S. A., Malavolta, G., & Moreno-Sánchez, P. (2021). Universal atomic swaps: Secure exchange of coins across all blockchains. Cryptology ePrint Archive.
