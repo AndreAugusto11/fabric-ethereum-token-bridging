@@ -104,7 +104,7 @@ Examples of deployed systems: Polkadot, and Cosmos.
 Trusted Relays are trusted parties that, through the implementation of core components (that implement the necessary business logic) and blockchains adapters/connectors, provide interoperability between the same blockchains. This approach opens the door to interoperable solutions between any kind of blockchain, in which the only requirement is the implementation of specific APIs, thus being a scalable and extensible architectural pattern. To support one blockchain, a connector/adapter needs to be implemented in the relay which seamlessly integrated with the respective blockchain.
 There is one drawback when choosing this solution to realize interoperability. This relay is trusted including, the core component that defines the business logic. We, thus, need to rely on trusted hardware (Trusted Platform Module — e.g., Intel SGX), or decentralize this relay with the deployment of multiple nodes. Hyperledger Cactus [5] can be considered a trusted relay that achieves interoperability by leveraging a consortium of Cactus nodes.
 
-Examples of deployed protocols: Interledger [6] and ODAP [7].
+Examples of deployed protocols: Weaver [6] and ODAP [7].
 
 <p align="center">
   <img src="images/trusted-relay.png" />
@@ -227,7 +227,7 @@ Additionally, given the private nature of Fabric there can arise some problems a
 
 5. Montgomery, H., Borne-Pons, H., Hamilton, J., Bowman, M., Somogyvari, P., Fujimoto, S., … Belchior, R. (2022). Hyperledger Cactus Whitepaper. Hyperledger website: https://github.com/hyperledger/cactus/blob/main/whitepaper/whitepaper.md
 
-6. Wu, L., Kortesniemi, Y., Lagutin, D., & Pahlevan, M. (2021, September). The flexible interledger bridge design. In 2021 3rd Conference on Blockchain Research & Applications for Innovative Networks and Services (BRAINS) (pp. 69-72). IEEE.
+6. Ermyas Abebe, Dushyant Behl, Chander Govindarajan, Yining Hu, Dileban Karunamoorthy, Petr Novotny, Vinayaka Pandit, Venkatraman Ramakrishna, Christian Vecchiola, Enabling Enterprise Blockchain Interoperability with Trusted Data Transfer, Middleware 2019 - Industry Track
 
 7. M. Hargreaves, T. Hardjono, R. Belchior, Open digital asset protocol draft
 02, draft-hargreaves-odap-03, 2021, Internet Engineering Task Force, URL

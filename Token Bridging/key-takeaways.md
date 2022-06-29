@@ -11,6 +11,7 @@
     - [The Flexible Interledger Bridge Design](#the-flexible-interledger-bridge-design)
     - [Research on Cross-chain Technology of Blockchain: Challenges and Prospects](#research-on-cross-chain-technology-of-blockchain-challenges-and-prospects)
     - [Hermes: Fault-tolerant middleware for blockchain interoperability](#hermes-fault-tolerant-middleware-for-blockchain-interoperability)
+    - [Enabling Enterprise Blockchain Interoperability with Trusted Data Transfer (industry track)](#enabling-enterprise-blockchain-interoperability-with-trusted-data-transfer-industry-track)
   - [Papers: Consortium - EVM (or similar) bridges](#papers-consortium---evm-or-similar-bridges)
     - [Niji: Autonomous Payment Bridge between Bitcoin and Consortium Blockchain](#niji-autonomous-payment-bridge-between-bitcoin-and-consortium-blockchain)
     - [Comparison of Hyperledger Fabric and Ethereum Blockchain](#comparison-of-hyperledger-fabric-and-ethereum-blockchain)
@@ -31,7 +32,7 @@ The paper specifies the operations/functions performed by every actor which is a
 
 - Fault Tolerance: there is no reference to being a fault tolerant protocol.
 
-- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, in which it is not possible to conduct under this circumstances.
+- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, which are not possible to conduct under this circumstances.
 
 ### Horizon: A Gas-Efficient, Trustless Bridge for Cross-Chain Transactions
 This new model is very interesting, where a relay has the responsibility of syncing one smart contract in one chain, with the headers from the other one (like an SPV client). The authors base the threat model of the protocol on rational adversaries, in which an entity misbehaves only if it benefits from it. Apart from this, the protocol is byzantine behavior resistance. Atomicity is guaranteed, but only assuming there is a Trusted Third party that acts in the client's interest by financial insuring the assets.
@@ -40,7 +41,7 @@ This new model is very interesting, where a relay has the responsibility of sync
 
 - Fault Tolerance: the authors assume that a pool of relays and full nodes is always available to replace the ones that crash, but the procedure to do so is not specified, nor the way to detect faults.
 
-- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, in which it is not possible to conduct under this circumstances.
+- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, which are not possible to conduct under this circumstances.
 
 ### A notary group-based cross-chain mechanism
 Instead of risking DoS attacks, or having a single point of failure by having a singe notary entity that mediates transactions between blockchains, there is a decentralization of this intermediary by deploying a network of notaries with incentive mechanisms for security purposes. This is a very good approach to defend ourselves from the aforementioned attacks, going towards a more decentralized solution.
@@ -49,7 +50,7 @@ Instead of risking DoS attacks, or having a single point of failure by having a 
 
 - Fault Tolerance: the authors base the protocol in an incentive mechanism to encourage nodes to maintain the network. Participants might get slashed for bad behavior, or have their reputation decreased if there are crashes or network partitions.
 
-- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, in which it is not possible to conduct under this circumstances.
+- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, which are not possible to conduct under this circumstances.
 
 ### An Electricity Cross-Chain Platform based on Sidechain Relay
 The authors compare the proposed solution to Polkadot and Cosmos, having their own cross-chain communication protocol like IBC in Cosmos, or XCMP in Polkadot. It is not much clear what are the improvements to this existing solutions. Additionally, the main chain in this system completely acts as the bottleneck in the network, where the maximum throughput is achieved when 18 blockchains are connected, which are far away from the numbers provided (and expected in the future) for both Polkadot and Cosmos.
@@ -58,7 +59,7 @@ The authors compare the proposed solution to Polkadot and Cosmos, having their o
 
 - Fault Tolerance: there is no reference to being a fault tolerant protocol.
 
-- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, in which it is not possible to conduct under this circumstances.
+- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, which are not possible to conduct under this circumstances.
 
 ### Trustless, privacy-preserving blockchain bridges
 Presents the concept of coin mixer, which is a system that makes difficult to map deposits to withdrawals.
@@ -69,7 +70,7 @@ Similarly as other solutions presented here, both sides of the protocol require 
 
 - Fault Tolerance: the protocol leverages an incentive mechanism to encourage nodes to maintain the network
 
-- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, in which it is not possible to conduct under this circumstances.
+- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, which are not possible to conduct under this circumstances.
 
 ### The Flexible Interledger Bridge Design
 The proposed design is based on a trusted relay that interconnect different blockchains through pluggable ledger adaptors. This architecture is very similar to what Hyperledger Cactus offers, but following an event-driven design.
@@ -79,7 +80,7 @@ The overall protocol is completely agnostic to the underlying technologies and b
 
 - Fault Tolerance: there is no reference to being a fault tolerant protocol.
 
-- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, in which it is not possible to conduct under this circumstances.
+- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, which are not possible to conduct under this circumstances.
 
 ### Research on Cross-chain Technology of Blockchain: Challenges and Prospects
 This paper does not bring anything new to the table. It is focused on an analysis of the current solutions to achieve interoperability, but they were already mentioned before.
@@ -93,6 +94,15 @@ Presents Hermes, an interoperability solution based on gateways and on the Open 
 - Fault Tolerance: there is presented a sub-protocol to be triggered in case of a gateway crash. Additionally, the authors propose a rollback procedure to guarantee atomicity and finality.
 
 - Auditability & Logging/Support/Alerting: by specifying the recovery procedure based on log generation and storage, the entire protocol is auditable by consulting Logs stored in the decentralized log storage (such as an IPFS network).
+
+### Enabling Enterprise Blockchain Interoperability with Trusted Data Transfer (industry track)
+The authors propose a solution architecture based on relay services based on different networks, that communicate with each other to exchange data and information. This architecture is similar to Hermes (last paper). Business logic and network rules are enforced through the deployment of smart contracts in each network. The authors evaluate the solution in respect to availability, confidentiality, and integrity. Additionally, the architecture is easily extensible by making small API modifications to the relay service so as to being compatible with other platform-specific implementations.
+
+- Privacy: The same as the previous paper. the architecture is intended to be as agnostic as possible regarding the underlying networks, however, each relay service needs to have access and read/write permission to the underlying platform. The interaction between parties in different networks should be kept private and confidential.
+
+- Fault Tolerance: there is no reference to being a fault tolerant protocol.
+
+- Auditability & Logging/Support/Alerting: there is no information regarding both logging procedures and alerting mechanisms. This is also related to auditability procedures, which are not possible to conduct under this circumstances.
 
 ## Papers: Consortium - EVM (or similar) bridges
 
