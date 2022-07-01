@@ -12,8 +12,12 @@ This file provides an overview of the development process to be followed, assumi
 7. Chaincode implementation for token locking.
 8. Smart Contract implementation for asset/token minting in Hyperledger Besu.
 9. Package implementation to realize the bridge-out of Fabric tokens to a Hyperledger Besu network.
+<br></br>
 
-To be reviewed, and continued...
+<p align="center">
+  <img src="images/dev-process.png" width="100%" />
+</p>
+
 
 ### What is it done already?
 - Creation, set up, and integration of both Hyperledger Fabric and Hyperledger Besu.
