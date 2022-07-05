@@ -18,7 +18,7 @@ This file provides an overview of the development process to be followed, assumi
 
 5. **Lock token logic in source network**: token locking in the source blockchain can be achieved through the transfer of a token to a gateway controlled smart contract, that will function similarly as an escrow. The respective gateway will have control over the token from that moment on, and cannot be moved until unlocked by the same.
 
-6. **Mint token logic in target network**: minting the token representation in the target blockchain can be achieved by the respective gateway in an address controlled by it. Therefore, one token is created in an address controlled by the gateway, which will then be transferred to the final user. Eventually, the token can be minted directly to the user address if the gateway is authorized to do so.
+6. **Mint token logic in target network**: minting the token representation in the target blockchain can be done by the respective gateway in an address controlled by it. Therefore, one token is created in an smart contract controlled by the gateway (or a smart contract where the gateway has permission to mint tokens), which will then be transferred to the final user.
 
 7. **Implementation of bridge logic**: implementation of the translation of assets from the source to the target network, and mint the token representation in the corresponding target network address.
 
@@ -40,7 +40,7 @@ This file provides an overview of the development process to be followed, assumi
 
 3. **Creation of Docker image for deployment purposes**: for deployment purposes, we should create a Docker image so as to ease de future deployment procedure of such infrastructure.
 
-4. **Create documentation to suport bridge usage**: we intend to create installation scripts, configs, how to run, how to extend, etc. This is an open door for future collaborations where one can try our solution and eventually extend to support the required use-case.
+4. **Create documentation to support bridge usage**: we intend to create installation scripts, configs, how to run, how to extend to other types of tokens, etc. This is an open door for future collaborations where one can try our solution and eventually extend to support the required use-case.
 
 <p align="center">
   <img src="images/operation-process.png" width="90%" />
