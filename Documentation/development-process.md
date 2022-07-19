@@ -1,4 +1,4 @@
-# Development Process
+# Development and Operational Processes
 
 This file provides an overview of the development process to be followed, assuming the implementation is being performed in Hyperledger Cactus, using the implementation of the ODAP plugin.
 
