@@ -27,7 +27,7 @@ ODAP is initiated and ends with the creation of the representation of the asset 
 ### CBDC CC
 This smart contract definition intends to specify the CBDC details. This implements ERC-20 standard, which allows the implementation of fungible tokens like a stablecoin. The chaincode uses Fabric Client Identities.
 
-## Components
+## Bridging Components
 ### ASSET REFERENCE
 This smart contract definition intends to encapsulate a certain amount of a determined token in a new data structure. An asset reference will be locked/created/destroyed/... when running ODAP. The new object has the following properties:
 - **id**: ID so that the object can be referenced.
@@ -49,3 +49,19 @@ Gateway connected to a Hyperledger Fabric network, which has read and write perm
 
 ### GATEWAY 2
 Gateway connected to a Hyperledger Besu network, which has read and write permissions in the network (where the smart contracts are deployed).
+
+## Ethereum addresses
+
+An address in Ethereum is a 42-character hexadecimal address derived from the last 20 bytes of the public key controlling the account. To access the funds in an ethereum address, one needs to have access to its private key.
+
+Elliptic curve cryptography is a type of public key cryptography based on the discrete logarithm problem as expressed by addition and multiplication on the points of an elliptic curve. Ethereum uses the same elliptic curve as Bitcoin, secp256k1 [1].
+
+## Hyperledger Fabric Identities
+
+In Fabric, the authorization and authentication procedures are based on X.509 certificates issued by Certificate Authorities. The keys of such certificates support Elliptic Curve Cryptography with the following curves: prime256v1, secp384r1, secp521r1 [2].
+
+## References
+
+1. Antonopoulos, A. M., Wood, G., & Wood, G. (2018). Mastering Ethereum: Building Smart Contracts and DApps. Ανακτήθηκε από https://books.google.pt/books?id=SedSMQAACAAJ
+
+2. Hyperledger Community. (n.d.). Fabric CA User's guide¶. hyperledger. Retrieved August 2, 2022, from https://hyperledger-fabric-ca.readthedocs.io/en/release-1.4/users-guide.html
