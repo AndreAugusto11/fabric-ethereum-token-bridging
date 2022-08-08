@@ -50,6 +50,14 @@ Gateway connected to a Hyperledger Fabric network, which has read and write perm
 ### GATEWAY 2
 Gateway connected to a Hyperledger Besu network, which has read and write permissions in the network (where the smart contracts are deployed).
 
+## Example
+
+The following image depicts the interaction of three different parties (A, B, and the bridging entity) bridging some CBDC.
+
+<p align="center">
+  <img src="images/bridge-flow.png" width="100%" />
+</p>
+
 ## Ethereum addresses
 
 An address in Ethereum is a 42-character hexadecimal address derived from the last 20 bytes of the public key controlling the account. To access the funds in an ethereum address, one needs to have access to its private key.
