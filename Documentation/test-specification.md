@@ -26,10 +26,10 @@ Goals:
 (we can also include the operations to rollback)
 
 Test cases:
-- `USER A FI` locks the asset reference in the Asset Reference chaincode successfully, and `USER B FI` is not able to lock the same asset until it is unlocked by `USER A FI`.
+- `USER A FI` locks the asset reference in the Asset Reference chaincode successfully. `USER B FI` tries to lock the same asset. Should fail because the asset was already locked.
 - `USER A FI` creates an asset reference in the Asset Reference chaincode successfully.
 - `USER A FI` deletes an existing asset reference in the Asset Reference chaincode successfully.
-- `USER A FI` escrows 100 CBDC and those tokens are transferred to the account of `BRIDGING ENTITY FI`. `USER A FI` has no longer control of those assets.
+- `USER A FI` escrows 100 CBDC and those tokens are transferred to the account of `BRIDGING ENTITY FI`. `USER A FI` tries to transfer the same 100 CDBC to `USER B FI`. Should fail because the CBDC were escrowed.
 
 ## EVM Gateway Unit Testing
 Goals:
@@ -43,10 +43,10 @@ Goals:
 (we can also include the operations to rollback)
 
 Test cases:
-- `USER A ETH` locks the asset reference in the Asset Reference smart contract successfully, and `USER B ETH` is not able to lock the same asset until it is unlocked by `USER A ETH`.
+- `USER A ETH` locks the asset reference in the Asset Reference smart contract successfully. `USER B ETH` tries to lock the same asset. Should fail because the asset was already locked.
 - `USER A ETH` creates an asset reference in the Asset Reference smart contract successfully.
 - `USER A ETH` deletes an existing asset reference in the Asset Reference smart contract successfully.
-- `USER A ETH` creates an asset reference in the Asset Reference smart contract, which should trigger the minting of tokens to `USER A ETH` address.
+- `USER A ETH` creates an asset reference in the Asset Reference smart contract. Should trigger the minting of tokens to `USER A ETH` address.
 - `USER A ETH` escrows 100 CBDC and those tokens are transferred to the account of `BRIDGING ENTITY ETH`.
 - `USER A ETH` deletes an asset reference corresponding to 100 CBDC and those tokens are burned to the account of `BRIDGING ENTITY ETH`.
 ## Bridging out Testing
@@ -56,9 +56,9 @@ Goals:
 
 Test cases (assuming 100 CBDC have been escrowed in the Fabric side by `USER A ETH`, and therefore, and asset reference representing 100 CBDC was created):
 - `USER A FI` initiates the bridging out of 100 CBDC to `USER A ETH`, and 100 CBDC are minted to the address of `USER A ETH`.
-- `USER A FI` initiates the bridging out of 100 CBDC to `USER B ETH`, and the operation fails.
-- `USER B FI` initiates the bridging out of 100 CBDC to `USER B ETH`, and the operation fails.
-- `USER A FI` initiates the bridging out of 200 CBDC to `USER A ETH`, and the operation fails.
+- `USER A FI` initiates the bridging out of 100 CBDC to `USER B ETH`, and the operation fails because `USER A FI` cannot mint tokens to another user address.
+- `USER B FI` initiates the bridging out of 100 CBDC to `USER B ETH`, and the operation fails because the tokens were escrowed by `USER A FI`.
+- `USER A FI` initiates the bridging out of 200 CBDC to `USER A ETH`, and the operation fails because only 100 CBDC were escrowed.
 ## Bridging back Testing
 
 Goals:
@@ -66,7 +66,7 @@ Goals:
 
 Test cases (assuming 100 CBDC have been escrowed in the EVM side by `USER A ETH`, and therefore, and asset reference representing 100 CBDC was created):
 - `USER A ETH` initiates bridging back of 100 CBDC to `USER A FI`. 100 CBDC are burned in `BRIDGING ENTITY ETH`, and only 100 CBDC are unlocked back to `USER A FI` in the Fabric side.
-- `USER A ETH` initiates bridging back of 100 CBDC to `USER B FI`. The operation fails.
+- `USER A ETH` initiates bridging back of 100 CBDC to `USER B FI`. The operation fails, because `USER A ETH` cannot bridge back CBDC to another user.
 - `USER A ETH` initiates bridging back of 50 CBDC to `USER A FI`. 50 CBDC are burned in `BRIDGING ENTITY ETH`, and only 50 CBDC are unlocked back to `USER A FI` in the Fabric side.
-- `USER A ETH` initiates bridging back of 200 CBDC to `USER A FI`. The operation fails.
-- `USER B ETH` initiates bridging back of 100 CBDC to `USER B FI`. The operation fails.
+- `USER A ETH` initiates bridging back of 200 CBDC to `USER A FI`. The operation fails because only 100 CBDC were escrowed.
+- `USER B ETH` initiates bridging back of 100 CBDC to `USER B FI`. The operation fails because the tokens were escrowed by `USER A ETH`.
