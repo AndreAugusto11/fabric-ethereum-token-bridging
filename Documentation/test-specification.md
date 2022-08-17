@@ -1,34 +1,72 @@
 # Test Specification
-This file intends to make the testing specification for our bridging application. We assume the following nomenclature:
-- **ADDRESS 1**: Represents the bridging initiating party in the main ledger. It can be either the final user, a financial institution on behalf of the same, etc..
-- **ADDRESS 2**: The address of the final user in the target ledger.
+This file intends to make the testing specification for our bridging application.
 
-## Functional Tests
-Let us define different scenarios:
+## Involved Parties
+We assume there is a mapping between the Fabric side and the EVM side, which can be translated into a mapping between client identities and ethereum addresses.
 
-1. **ADDRESS 1** escrows X CBDC in the main ledger, and those tokens cannot be moved by **ADDRESS 1**, or other party besides the escrow entity.
+The existing Fabric network comprises two organizations. The first one includes the end/final users of the CBDC (`USER A` and `USER B`), whereas the second represents the organization responsible for the bridging procedure (`BRIDGING ENTITY`).
 
-2. **ADDRESS 1** escrows X CBDC in the main ledger, and those tokens can be moved by the bridging entity.
+<p align="center">
+  <img src="images/organizations.png" width="100%" />
+</p>
 
-3. **ADDRESS 1** initiates bridging out of X CBDC, and only X CBDC are minted to **ADDRESS 2**.
+FI - Fabric Identities
 
-4. ADDRESS (where A != 1) initiates bridging out of X CBDC escrowed by **ADDRESS 1**, and bridging operation fails.
+ETH - Ethereum address
 
-5. **ADDRESS 1** initiates bridging out of X CBDC, and **ADDRESS 2** has access to the X CBDC minted to **ADDRESS 2**.
+---
 
-6. **ADDRESS 1** initiates bridging out of X CBDC, and **ADDRESS B** (where B != 2) has not access to the X CBDC minted to **ADDRESS 2**.
+## Fabric Gateway Unit Testing
+Goals:
+- asset lock by the gateway is successful;
+- asset creation by the gateway is successful;
+- asset deletion by the gateway is successful;
+- escrow of tokens in the CBDC chaincode is working as indented: this corresponds to transferring the tokens to the bridging entity;
+- unescrow of tokens in the CBDC chaincode is working as indented: this corresponds to transferring the tokens back to the original owner;
+(we can also include the operations to rollback)
 
-7. **ADDRESS 2** initiates bridging back of X CBDC, and X CBDC are burnt in **ADDRESS 2**, and only X CBDC are unlocked back to **ADDRESS 1** in the main ledger.
+Test cases:
+- `USER A FI` locks the asset reference in the Asset Reference chaincode successfully, and `USER B FI` is not able to lock the same asset until it is unlocked by `USER A FI`.
+- `USER A FI` creates an asset reference in the Asset Reference chaincode successfully.
+- `USER A FI` deletes an existing asset reference in the Asset Reference chaincode successfully.
+- `USER A FI` escrows 100 CBDC and those tokens are transferred to the account of `BRIDGING ENTITY FI`. `USER A FI` has no longer control of those assets.
 
-8. **ADDRESS 2** initiates bridging back of Y CBDC (where Y < X), and Y CBDC are burnt in **ADDRESS 2**, and only Y CBDC are unlocked back to **ADDRESS 1**.
+## EVM Gateway Unit Testing
+Goals:
+- asset lock by the gateway is successful;
+- asset creation by the gateway is successful;
+- asset deletion by the gateway is successful;
+(we can also include the operations to rollback)
+- tokens are minted to the recipient address successfully when creating a new asset reference;
+- escrow of tokens in the sidechain smart contract is working as indented: this corresponds to transferring the tokens to the bridging entity;
+- when deleting an asset reference, the corresponding tokens are burned from the bridging address;
+(we can also include the operations to rollback)
 
-9. **ADDRESS B** (where B != 2) initiates bridging back of X CBDC owned by **ADDRESS 1**, and bridging operation fails.
+Test cases:
+- `USER A ETH` locks the asset reference in the Asset Reference smart contract successfully, and `USER B ETH` is not able to lock the same asset until it is unlocked by `USER A ETH`.
+- `USER A ETH` creates an asset reference in the Asset Reference smart contract successfully.
+- `USER A ETH` deletes an existing asset reference in the Asset Reference smart contract successfully.
+- `USER A ETH` creates an asset reference in the Asset Reference smart contract, which should trigger the minting of tokens to `USER A ETH` address.
+- `USER A ETH` escrows 100 CBDC and those tokens are transferred to the account of `BRIDGING ENTITY ETH`.
+- `USER A ETH` deletes an asset reference corresponding to 100 CBDC and those tokens are burned to the account of `BRIDGING ENTITY ETH`.
+## Bridging out Testing
 
-10. **ADDRESS A** (where A != 2) initiates bridging back of X CBDC owned by **ADDRESS 1**, and bridging fails.
+Goals:
+- Verify if the CBDC is being correctly minted in the EVM side, while being locked (escrowed) in the Fabric side.
 
-## Non-Functional Tests
-We assume the same nomenclature as before. Let us define different scenarios:
+Test cases (assuming 100 CBDC have been escrowed in the Fabric side by `USER A ETH`, and therefore, and asset reference representing 100 CBDC was created):
+- `USER A FI` initiates the bridging out of 100 CBDC to `USER A ETH`, and 100 CBDC are minted to the address of `USER A ETH`.
+- `USER A FI` initiates the bridging out of 100 CBDC to `USER B ETH`, and the operation fails.
+- `USER B FI` initiates the bridging out of 100 CBDC to `USER B ETH`, and the operation fails.
+- `USER A FI` initiates the bridging out of 200 CBDC to `USER A ETH`, and the operation fails.
+## Bridging back Testing
 
-1. **ADDRESS 1** initiates bridging out of X CBDC and Gateway 1 fails (should we specify where in the protocol that happens?) and recovers before timeout. The escrow should be in control of the X CBDC in the main ledger, and X CBDC should be minted to **ADDRESS 2**.
+Goals:
+- Verify if the CBDC is being correctly bridged back. This corresponds to burning the CBDC in the EVM side and unlocking them in the Fabric side.
 
-2. **ADDRESS 1** initiates bridging out of X CBDC and Gateway 1 fails (should we specify where in the protocol that happens?) and does not recover before timeout. **ADDRESS 1** should be in control of the X CBDC and the nothing should be minted to **ADDRESS 2**.
+Test cases (assuming 100 CBDC have been escrowed in the EVM side by `USER A ETH`, and therefore, and asset reference representing 100 CBDC was created):
+- `USER A ETH` initiates bridging back of 100 CBDC to `USER A FI`. 100 CBDC are burned in `BRIDGING ENTITY ETH`, and only 100 CBDC are unlocked back to `USER A FI` in the Fabric side.
+- `USER A ETH` initiates bridging back of 100 CBDC to `USER B FI`. The operation fails.
+- `USER A ETH` initiates bridging back of 50 CBDC to `USER A FI`. 50 CBDC are burned in `BRIDGING ENTITY ETH`, and only 50 CBDC are unlocked back to `USER A FI` in the Fabric side.
+- `USER A ETH` initiates bridging back of 200 CBDC to `USER A FI`. The operation fails.
+- `USER B ETH` initiates bridging back of 100 CBDC to `USER B FI`. The operation fails.
