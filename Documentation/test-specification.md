@@ -26,29 +26,29 @@ Goals:
 (we can also include the operations to rollback)
 
 Test cases:
-- `USER A FI` locks the asset reference in the Asset Reference chaincode successfully. `USER B FI` tries to lock the same asset. Should fail because the asset was already locked.
-- `USER A FI` creates an asset reference in the Asset Reference chaincode successfully.
-- `USER A FI` deletes an existing asset reference in the Asset Reference chaincode successfully.
+- `BRIDGING ENTITY FI` locks the asset reference in the Asset Reference chaincode successfully. `USER B FI` tries to lock the same asset. Should fail because `USER B FI` does not have the permission to perform that operation.
+- `BRIDGING ENTITY FI` creates an asset reference in the Asset Reference chaincode successfully.
+- `BRIDGING ENTITY FI` deletes an existing asset reference in the Asset Reference chaincode successfully.
 - `USER A FI` escrows 100 CBDC and those tokens are transferred to the account of `BRIDGING ENTITY FI`. `USER A FI` tries to transfer the same 100 CDBC to `USER B FI`. Should fail because the CBDC were escrowed.
+- `BRIDGING ENTITY FI` unescrows successfully the 100 CBDC to `USER A FI`.
 
 ## EVM Gateway Unit Testing
 Goals:
 - asset lock by the gateway is successful;
 - asset creation by the gateway is successful;
 - asset deletion by the gateway is successful;
-(we can also include the operations to rollback)
 - tokens are minted to the recipient address successfully when creating a new asset reference;
 - escrow of tokens in the sidechain smart contract is working as indented: this corresponds to transferring the tokens to the bridging entity;
 - when deleting an asset reference, the corresponding tokens are burned from the bridging address;
 (we can also include the operations to rollback)
 
 Test cases:
-- `USER A ETH` locks the asset reference in the Asset Reference smart contract successfully. `USER B ETH` tries to lock the same asset. Should fail because the asset was already locked.
-- `USER A ETH` creates an asset reference in the Asset Reference smart contract successfully.
-- `USER A ETH` deletes an existing asset reference in the Asset Reference smart contract successfully.
-- `USER A ETH` creates an asset reference in the Asset Reference smart contract. Should trigger the minting of tokens to `USER A ETH` address.
+- `BRIDGING ENTITY ETH` locks the asset reference in the Asset Reference smart contract successfully. `USER B ETH` tries to lock the same asset. Should fail because `USER B ETH` does not have the permission to perform that operation.
+- `BRIDGING ENTITY ETH` creates an asset reference in the Asset Reference smart contract successfully.
+- `BRIDGING ENTITY ETH` deletes an existing asset reference in the Asset Reference smart contract successfully.
+- `BRIDGING ENTITY ETH` creates an asset reference in the Asset Reference smart contract. Should trigger the minting of tokens to `USER A ETH` address.
 - `USER A ETH` escrows 100 CBDC and those tokens are transferred to the account of `BRIDGING ENTITY ETH`.
-- `USER A ETH` deletes an asset reference corresponding to 100 CBDC and those tokens are burned to the account of `BRIDGING ENTITY ETH`.
+- `BRIDGING ENTITY ETH` deletes an asset reference corresponding to 100 CBDC and those tokens are burned to the account of `BRIDGING ENTITY ETH`.
 ## Bridging out Testing
 
 Goals:
@@ -59,6 +59,7 @@ Test cases (assuming 100 CBDC have been escrowed in the Fabric side by `USER A E
 - `USER A FI` initiates the bridging out of 100 CBDC to `USER B ETH`, and the operation fails because `USER A FI` cannot mint tokens to another user address.
 - `USER B FI` initiates the bridging out of 100 CBDC to `USER B ETH`, and the operation fails because the tokens were escrowed by `USER A FI`.
 - `USER A FI` initiates the bridging out of 200 CBDC to `USER A ETH`, and the operation fails because only 100 CBDC were escrowed.
+
 ## Bridging back Testing
 
 Goals:
