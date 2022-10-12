@@ -7,3 +7,5 @@ The proposed project consists of the following major activities:
 * Creating a brief review of the bridging approaches and mature technologies widely used in the cryptoworld.
 * Performing a requirement analysis for bridging assets from Fabric to Ethereum-based networks (and back), taking into account that the parties performing the bridging have to be explicitly given permission to do so by an authority and may be subject to regulatory requirements (the simplest aspect of which is enforcing, or at least proving compliance to, an "allow list" of addresses on the Ethereum side during transactions).
 * Based on the available open-source components, designing and prototyping a Fabric-Ethereum bridge fulfilling the requirements.
+
+Access the source code [here](https://github.com/AndreAugusto11/cactus/tree/bridge-fabric-ethereum/examples/cactus-example-cbdc-bridging-backend).
