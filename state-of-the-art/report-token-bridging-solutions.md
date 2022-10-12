@@ -229,8 +229,8 @@ Additionally, given the private nature of Fabric there can arise some problems a
 
 6. Ermyas Abebe, Dushyant Behl, Chander Govindarajan, Yining Hu, Dileban Karunamoorthy, Petr Novotny, Vinayaka Pandit, Venkatraman Ramakrishna, Christian Vecchiola, Enabling Enterprise Blockchain Interoperability with Trusted Data Transfer, Middleware 2019 - Industry Track
 
-7. M. Hargreaves, T. Hardjono, R. Belchior, Open digital asset protocol draft
-02, draft-hargreaves-odap-03, 2021, Internet Engineering Task Force, URL
-https://datatracker.ietf.org/doc/html/draft-hargreaves-odap-03.
+7. M. Hargreaves, T. Hardjono, R. Belchior, Secure Asset Transfer Protocol draft
+00, draft-hargreaves-sat-core-00, 2022, Internet Engineering Task Force, URL
+https://datatracker.ietf.org/doc/draft-hargreaves-sat-core/.
 
 8. Thyagarajan, S. A., Malavolta, G., & Moreno-Sánchez, P. (2021). Universal atomic swaps: Secure exchange of coins across all blockchains. Cryptology ePrint Archive.
