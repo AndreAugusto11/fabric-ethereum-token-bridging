@@ -1,4 +1,8 @@
 # Fabric-Ethereum Token Bridging
+
+This is a Hyperledger Mentorship 2022 project. All the information can be accessed [here](https://wiki.hyperledger.org/display/INTERN/Fabric-Ethereum+token+bridging). This repository contains the deliverables of the project.
+
+## Description
 One of the key use cases of blockchain integration is asset bridging: in essence, "locking" an asset (typically, a native coin or token) in a smart contract on its authoritative ledger and making available corresponding, newly minted (wrapped/shadow/...) assets on another. By now, bridging is supported by quite mature solutions in the cryptoworld; however, the same is not true for "consortial" distributed ledger technologies. At the same time, such functionality can be expected to become an important requirement in the not too distant future: for instance, a central bank may choose to create a high performance, Hyperledger Fabric-based Central Bank Digital Currency (CBDC) ledger with a strongly controlled set of "smart contracts", but allow controlled "bridging out" of the currency to dedicated distributed ledgers of industrial/enterprise cooperations. Last year, a CBDC prototype with such functionality was created at the Dept. of Measurement and Information Systems of the Budapest University of Technology and Economics (BME), in a research project supported by the central bank of Hungary (MNB); our initial experience with a custom Hyperledger Cactus and TokenBridge based solution showed that this is a problem worth more targeted experimentation and systematic R&D.
 
 The proposed project consists of the following major activities:
@@ -8,4 +12,6 @@ The proposed project consists of the following major activities:
 * Performing a requirement analysis for bridging assets from Fabric to Ethereum-based networks (and back), taking into account that the parties performing the bridging have to be explicitly given permission to do so by an authority and may be subject to regulatory requirements (the simplest aspect of which is enforcing, or at least proving compliance to, an "allow list" of addresses on the Ethereum side during transactions).
 * Based on the available open-source components, designing and prototyping a Fabric-Ethereum bridge fulfilling the requirements.
 
-Access the source code [here](https://github.com/AndreAugusto11/cactus/tree/bridge-fabric-ethereum/examples/cactus-example-cbdc-bridging-backend).
+## Solution
+
+The solution is available in Hyperledger Cactus as a Pull Request: [PR 2185](https://github.com/hyperledger/cactus/pull/2185).

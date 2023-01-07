@@ -20,10 +20,6 @@ When a user wants to bridge back the tokens from the target chain to the source 
 
 ODAP is initiated and ends with the creation of the representation of the asset reference in the source chain. Internally, this triggers the unlock of the same amount of tokens which is achieved by transferring the tokens to the address of the final user (TBD).
 
-<p align="center">
-  <img src="images/besu-fabric-sequence-diagram.png" width="100%" />
-</p>
-
 ### CBDC CC
 This smart contract definition intends to specify the CBDC details. This implements ERC-20 standard, which allows the implementation of fungible tokens like a stablecoin. The chaincode uses Fabric Client Identities.
 
