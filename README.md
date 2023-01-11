@@ -12,6 +12,14 @@ The proposed project consists of the following major activities:
 * Performing a requirement analysis for bridging assets from Fabric to Ethereum-based networks (and back), taking into account that the parties performing the bridging have to be explicitly given permission to do so by an authority and may be subject to regulatory requirements (the simplest aspect of which is enforcing, or at least proving compliance to, an "allow list" of addresses on the Ethereum side during transactions).
 * Based on the available open-source components, designing and prototyping a Fabric-Ethereum bridge fulfilling the requirements.
 
-## Solution
+## Implementation
 
 The solution is available in Hyperledger Cactus as a Pull Request: [PR 2185](https://github.com/hyperledger/cactus/pull/2185).
+
+The code includes a web interface in React to interect with the bridge.
+
+<p float="center">
+  <img src="images/frontend.png" width="100%" />
+</p>
+
+There is also an online demo [here](https://drive.google.com/file/d/1MBjxsVnjEgCnzL0t62s8roOENYcZybiQ/view?usp=sharing).
